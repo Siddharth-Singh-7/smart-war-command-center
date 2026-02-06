@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 4%;
+    --foreground: 180 10% 90%;
+
+    --card: 240 10% 6%;
+    --card-foreground: 180 10% 90%;
+
+    --popover: 240 10% 4%;
+    --popover-foreground: 180 10% 90%;
+
+    --primary: 180 100% 50%;
+    --primary-foreground: 180 10% 5%;
+
+    --secondary: 210 100% 50%;
+    --secondary-foreground: 180 10% 95%;
+
+    --muted: 240 10% 15%;
+    --muted-foreground: 180 20% 60%;
+
+    --accent: 180 100% 50%;
+    --accent-foreground: 180 10% 5%;
+
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 180 100% 50% / 0.2;
+    --input: 180 100% 50% / 0.2;
+    --ring: 180 100% 50%;
+
+    --radius: 0.25rem;
+
+    /* Custom tactical tokens */
+    --cyan-glow: 180 100% 50%;
+    --blue-glow: 210 100% 50%;
+    --red-glow: 0 100% 60%;
+    --amber-glow: 45 100% 50%;
+    --green-glow: 120 100% 50%;
+    
+    --glass-bg: 240 10% 6% / 0.7;
+    --glass-border: 180 100% 50% / 0.3;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Rajdhani', sans-serif;
+    overflow: hidden;
+    background-image: 
+      radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+      linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+      linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 100%, 100% 2px, 3px 100%;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 0.1em;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-background/60 backdrop-blur-md border border-primary/30 relative overflow-hidden;
+  }
+
+  .glass-panel::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none;
+  }
+
+  .scanning-line {
+    @apply absolute w-full h-[1px] bg-primary/40 shadow-[0_0_8px_rgba(0,255,255,0.5)];
+    animation: scan 4s linear infinite;
+  }
+
+  .tactical-glow {
+    @apply shadow-[0_0_15px_rgba(0,255,255,0.3)];
+  }
+
+  .neon-text {
+    @apply text-primary drop-shadow-[0_0_5px_rgba(0,255,255,0.5)];
+  }
+}
+
+@keyframes scan {
+  from { top: -10%; }
+  to { top: 110%; }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes radar-sweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.radar-sweep {
+  animation: radar-sweep 4s linear infinite;
+}
